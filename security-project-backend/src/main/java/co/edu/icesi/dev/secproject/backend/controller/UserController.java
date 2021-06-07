@@ -29,14 +29,14 @@ public class UserController {
 
 	@PutMapping("/blank")
 	@PreAuthorize("hasAuthority('admin')")
-	public ResponseEntity<?> blankPassword(@RequestParam(name = "username") String username) {
+	public ResponseEntity<String> blankPassword(@RequestParam(name = "username") String username) {
 		service.blankPassword(username);
 		return new ResponseEntity<String>("Se ha puesto en blanco la contraseña del usuario.", HttpStatus.OK);
 	}
 
 	@PutMapping("/change")
 	@PreAuthorize("hasAuthority('regular')")
-	public ResponseEntity<?> changePassword(@RequestParam(name = "newPassword") String password) {
+	public ResponseEntity<String> changePassword(@RequestParam(name = "newPassword") String password) {
 		UserrAuthDTO user = (UserrAuthDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		service.changePassword(user.getUsername(), password);
 		return new ResponseEntity<String>("Se ha cambiado la contraseña del usuario.", HttpStatus.OK);
@@ -45,20 +45,20 @@ public class UserController {
 	@DeleteMapping("/delete")
 	@PreAuthorize("hasAuthority('admin')")
 	@Transactional
-	public ResponseEntity<?> deleteUser(@RequestParam(name = "username") String username) {
+	public ResponseEntity<String> deleteUser(@RequestParam(name = "username") String username) {
 		service.removeUser(username);
 		return new ResponseEntity<String>("Se ha borrado el usuario.", HttpStatus.OK);
 	}
 
 	@GetMapping("/get")
 	@PreAuthorize("hasAuthority('admin')")
-	public ResponseEntity<?> findAllUsers() {
+	public ResponseEntity<List<String>> findAllUsers() {
 		return new ResponseEntity<List<String>>(service.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping("/get/login")
 	@PreAuthorize("hasAuthority('regular')")
-	public ResponseEntity<?> getLastLogin() {
+	public ResponseEntity<String> getLastLogin() {
 		UserrAuthDTO user = (UserrAuthDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return new ResponseEntity<String>(service.getLastLogin(user.getUsername()), HttpStatus.OK);
 	}
