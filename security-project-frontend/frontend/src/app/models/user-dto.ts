@@ -1,6 +1,5 @@
 export class UserDto {
-  userId: string;
   username: string;
-  clientName: string;
-  contractName: string;
+  password: string;
+  authorities: string;
 }

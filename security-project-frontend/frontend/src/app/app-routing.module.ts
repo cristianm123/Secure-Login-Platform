@@ -6,9 +6,9 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    data: {
-      expectedRol: ['superadmin', 'client-admin', 'contract-admin']
-    },
+    // data: {
+    //   expectedRol: ['superadmin', 'client-admin', 'contract-admin']
+    // },
     loadChildren: () => import('./pages/main-content/main-content.module').then(m => m.MainContentModule),
   },
   {

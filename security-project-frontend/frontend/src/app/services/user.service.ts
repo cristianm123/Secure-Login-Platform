@@ -7,8 +7,6 @@ import { UserDto } from "../models/user-dto";
 const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUserName';
 const AUTHORITIES_KEY = 'AuthAuthorities';
-const CLIENT_ID = 'AuthClientId';
-const CONTRACT_ID = 'AuthContractId';
 
 @Injectable({
   providedIn: 'root'
@@ -28,24 +26,6 @@ export class UserService {
 
   getToken(): string {
     return sessionStorage.getItem(TOKEN_KEY);
-  }
-
-  getClientId(): string {
-    return sessionStorage.getItem(CLIENT_ID);
-  }
-
-  getContractId(): string {
-    return sessionStorage.getItem(CONTRACT_ID);
-  }
-
-  setClientId(clientId: string): void {
-    window.sessionStorage.removeItem(CLIENT_ID);
-    window.sessionStorage.setItem(CLIENT_ID, clientId);
-  }
-
-  setContractId(contractId: string): void {
-    window.sessionStorage.removeItem(CONTRACT_ID);
-    window.sessionStorage.setItem(CONTRACT_ID, contractId);
   }
 
   setUserName(userName: string): void {

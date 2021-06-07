@@ -50,8 +50,6 @@ export class LoginComponent implements OnInit {
           this.tokenService.setToken(response.token);
           this.tokenService.setUserName(response.username);
           this.tokenService.setAuthorities(response.authority);
-          response.clientId ? this.tokenService.setClientId(response.clientId) : of(null);
-          response.contractId ? this.tokenService.setContractId(response.contractId) : of(null);
           return this.router.navigate(['']);
         }),
         catchError((err) => {
