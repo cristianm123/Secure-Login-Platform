@@ -12,11 +12,8 @@ import {
   NbToastrModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NgxEchartsModule } from 'ngx-echarts';
 import { HttpClientModule } from '@angular/common/http';
-import * as echarts from 'echarts';
 import { interceptorRequestProvider } from "./interceptors/request-interceptor.service";
-import { interceptorErrorProvider } from "./interceptors/error-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -34,9 +31,6 @@ import { interceptorErrorProvider } from "./interceptors/error-interceptor.servi
     NbToastrModule.forRoot(),
     NbEvaIconsModule,
     NbLayoutModule,
-    NgxEchartsModule.forRoot({
-      echarts,
-    }),
   ],
   providers: [
     interceptorRequestProvider,
