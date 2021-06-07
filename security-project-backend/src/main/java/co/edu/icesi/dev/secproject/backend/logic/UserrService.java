@@ -3,7 +3,6 @@ package co.edu.icesi.dev.secproject.backend.logic;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -47,12 +46,11 @@ public class UserrService {
 		return userRepo.findAllUsernames();
 	}
 
-	public String getLastLogin(String username) {
+	public LocalDateTime getLastLogin(String username) {
 
 		Date d = loginRepo.findLastLoginByUser(userRepo.findById(username).get());
 		LocalDateTime l = Instant.ofEpochMilli(d.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		return l.format(formatter);
+		return l;
 	}
 
 	public Userr getUser(String username) {

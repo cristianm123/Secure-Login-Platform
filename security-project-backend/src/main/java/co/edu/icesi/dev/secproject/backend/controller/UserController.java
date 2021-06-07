@@ -1,5 +1,6 @@
 package co.edu.icesi.dev.secproject.backend.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,9 @@ public class UserController {
 
 	@PutMapping("/blank")
 	@PreAuthorize("hasAuthority('admin')")
-	public ResponseEntity<String> blankPassword(@RequestParam(name = "username") String username) {
+	public ResponseEntity<?> blankPassword(@RequestParam(name = "username") String username) {
 		service.blankPassword(username);
-		return new ResponseEntity<String>("Se ha puesto en blanco la contraseña del usuario.", HttpStatus.OK);
+		return ResponseEntity.ok(null);
 	}
 
 	@PutMapping("/change")
@@ -39,7 +40,7 @@ public class UserController {
 	public ResponseEntity<String> changePassword(@RequestParam(name = "newPassword") String password) {
 		UserrAuthDTO user = (UserrAuthDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		service.changePassword(user.getUsername(), password);
-		return new ResponseEntity<String>("Se ha cambiado la contraseña del usuario.", HttpStatus.OK);
+		return ResponseEntity.ok(null);
 	}
 
 	@DeleteMapping("/delete")
@@ -47,7 +48,7 @@ public class UserController {
 	@Transactional
 	public ResponseEntity<String> deleteUser(@RequestParam(name = "username") String username) {
 		service.removeUser(username);
-		return new ResponseEntity<String>("Se ha borrado el usuario.", HttpStatus.OK);
+		return ResponseEntity.ok(null);
 	}
 
 	@GetMapping("/get")
@@ -58,8 +59,9 @@ public class UserController {
 
 	@GetMapping("/get/login")
 	@PreAuthorize("hasAuthority('regular')")
-	public ResponseEntity<String> getLastLogin() {
+	public ResponseEntity<LocalDateTime> getLastLogin() {
 		UserrAuthDTO user = (UserrAuthDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return new ResponseEntity<String>(service.getLastLogin(user.getUsername()), HttpStatus.OK);
+		return new ResponseEntity<LocalDateTime>(service.getLastLogin(user.getUsername()), HttpStatus.OK);
+		// return service.getLastLogin(user.getUsername());
 	}
 }
