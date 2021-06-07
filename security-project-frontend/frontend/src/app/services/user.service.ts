@@ -69,7 +69,7 @@ export class UserService {
   }
 
   changePassword(newPassword: string): Observable<string> {
-    return this.httpClient.put<string>(USER_ENDPOINT + `change`, {
+    return this.httpClient.put<string>(USER_ENDPOINT + `change`, null, {
       params: {
         newPassword
       }
@@ -77,7 +77,7 @@ export class UserService {
   }
 
   blankPassword(username: string): Observable<string> {
-    return this.httpClient.put<string>(USER_ENDPOINT + `blank`, {
+    return this.httpClient.put<string>(USER_ENDPOINT + `blank`, null,{
       params: {
         username
       }

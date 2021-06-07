@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../services/user.service";
-import {UserDto} from "../../models/user-dto";
+import { UserService } from "../../services/user.service";
+import { NbToastrService } from "@nebular/theme";
+import { tap } from "rxjs/operators";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private message: NbToastrService,
   ) { }
 
   async ngOnInit() {
@@ -26,5 +28,21 @@ export class DashboardComponent implements OnInit {
     this.username = this.userService.getUserName();
     this.lastLoginDate = this.roles.includes('regular') ? await this.userService.getLastLoginDate().toPromise() : null;
     this.users = this.roles.includes('admin') ? await this.userService.getAllUsers().toPromise() : null;
+  }
+
+  blankPassword(user: string) {
+    this.userService.blankPassword(user)
+      .pipe(
+        tap((message) => this.message.success(message)),
+      )
+      .subscribe();
+  }
+
+  removeUser(user: string) {
+    this.userService.deleteUser(user)
+      .pipe(
+        tap((message) => this.message.success(message)),
+      )
+      .subscribe();
   }
 }

@@ -9,7 +9,7 @@ import { UserService } from "../../services/user.service";
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.scss'],
 })
-export class MainContentComponent implements OnInit {
+export class MainContentComponent {
 
   menu = MENU_ITEMS;
   title = APP_NAME;
@@ -25,14 +25,6 @@ export class MainContentComponent implements OnInit {
     this.icon = localStorage.getItem('theme') ? localStorage.getItem('icon') : 'moon-outline';
     this.username = tokenService.getUserName();
     this.roles = tokenService.getAuthorities();
-  }
-
-  ngOnInit(): void {
-    this.showMessageDialog();
-  }
-
-  showMessageDialog() {
-    const roles = this.tokenService.getAuthorities();
   }
 
   toggle(): void {
