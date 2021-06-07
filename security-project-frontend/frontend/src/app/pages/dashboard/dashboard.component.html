@@ -1,19 +1,20 @@
 <section class="text-center" *ngIf="roles.includes('admin') else admin">
-  <h2>Hola {{username}}</h2>
-  <nb-card size="small" class="w-25 mt-4 m-auto h-100">
+  <nb-card status="primary" size="small" class="w-25 mt-5 m-auto h-100">
+    <nb-card-header>
+      <h5>Usuarios de la plataforma</h5>
+    </nb-card-header>
     <nb-list>
-      <nb-list-item *ngFor="let user of users">
-        <nb-user size="large" [name]="user">
+      <nb-list-item class="row m-0" *ngFor="let user of users">
+        <nb-user class="col-8" size="large" [name]="user">
         </nb-user>
-        <button nbTooltip="Eliminar usuario" size="large" nbButton ghost status="danger"><nb-icon icon="trash-2-outline"></nb-icon></button>
-        <button nbTooltip="Poner en blanco contraseña" size="large" nbButton ghost status="danger"><nb-icon icon="file-remove-outline"></nb-icon></button>
+        <button (click)="removeUser(user)" class="col-2" nbTooltip="Eliminar usuario" size="large" nbButton ghost status="danger"><nb-icon icon="trash-2-outline"></nb-icon></button>
+        <button (click)="blankPassword(user)" class="col-2" nbTooltip="Poner en blanco contraseña" size="large" nbButton ghost status="danger"><nb-icon icon="file-remove-outline"></nb-icon></button>
       </nb-list-item>
     </nb-list>
   </nb-card>
 </section>
 <ng-template #admin>
   <section class="text-center">
-    <h2>Hola {{username}}</h2>
     <h3>Ultimo inicio de sesión {{lastLoginDate}}</h3>
   </section>
 </ng-template>
