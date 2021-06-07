@@ -1,0 +1,69 @@
+<nb-layout>
+  <nb-layout-column class="h-100 d-flex">
+    <nb-card status="primary" class="m-auto col p-0">
+      <nb-card-header class="text-center">
+        <button class="mr-3" (click)="switchMode()" shape="round" nbButton ghost status="control"><nb-icon [icon]="icon"></nb-icon></button>
+      </nb-card-header>
+      <nb-card-body class="p-4">
+        <section class="text-center">
+          <h1>{{title}}</h1>
+        </section>
+
+        <section>
+          <form aria-labelledby="title" [formGroup]="form">
+            <div class="form-group">
+              <label class="label" for="input-user" hidden>Usuario:</label>
+              <input nbInput
+                     formControlName="user"
+                     fullWidth
+                     name="user"
+                     id="input-user"
+                     placeholder="Usuario"
+                     fieldSize="large"
+              >
+              <ng-container *ngIf="form.get('user').invalid && form.get('user').touched">
+                <p class="mt-1 caption status-danger" *ngIf="form.get('user').hasError('required')">
+                  El usuario es requerido
+                </p>
+              </ng-container>
+            </div>
+            <div class="form-group mt-4">
+              <span class="label-with-link">
+                <label class="label" for="input-password" hidden>Contraseña:</label>
+                <a class="forgot-password caption-2" routerLink="../request-password" hidden>Forgot Password?</a>
+              </span>
+              <input nbInput
+                     fullWidth
+                     formControlName="password"
+                     name="password"
+                     type="password"
+                     id="input-password"
+                     placeholder="Contraseña"
+                     fieldSize="large"
+              >
+              <ng-container *ngIf="form.get('password').invalid && form.get('password').touched">
+                <p class="mt-1 caption status-danger" *ngIf="form.get('password').hasError('required')">
+                  La contraseña es requerida
+                </p>
+                <p class="mt-1 caption status-danger" *ngIf="form.get('password').hasError('minlength')">
+                  La contraseña debe tener minimo 4 caracteres
+                </p>
+              </ng-container>
+            </div>
+            <button nbButton
+                    [disabled]="form.invalid"
+                    fullWidth
+                    status="primary"
+                    size="large"
+                    class="mt-4"
+                    (click)="login()"
+                    >
+              Iniciar sesión
+            </button>
+          </form>
+        </section>
+
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>
