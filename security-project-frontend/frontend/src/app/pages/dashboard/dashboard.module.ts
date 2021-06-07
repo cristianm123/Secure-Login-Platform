@@ -2,7 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import {NbButtonModule, NbCardModule, NbIconModule, NbListModule, NbTooltipModule, NbUserModule} from "@nebular/theme";
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbIconModule,
+  NbInputModule,
+  NbListModule,
+  NbTooltipModule,
+  NbUserModule
+} from "@nebular/theme";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -15,6 +24,8 @@ import {NbButtonModule, NbCardModule, NbIconModule, NbListModule, NbTooltipModul
     NbButtonModule,
     NbIconModule,
     NbTooltipModule,
+    NbInputModule,
+    ReactiveFormsModule,
   ]
 })
 export class DashboardModule { }

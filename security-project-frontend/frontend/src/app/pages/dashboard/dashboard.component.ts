@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../services/user.service";
 import { NbToastrService } from "@nebular/theme";
 import {switchMap, tap} from "rxjs/operators";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-dashboard',
@@ -17,11 +18,17 @@ export class DashboardComponent implements OnInit {
   lastLoginDate: Date;
   username: string;
   users: string[];
+  form: FormGroup;
 
   constructor(
     private userService: UserService,
     private message: NbToastrService,
-  ) { }
+    private formBuilder: FormBuilder,
+  ) {
+    this.form = this.formBuilder.group({
+      password: ['', [Validators.required, Validators.minLength(4)]],
+    });
+  }
 
   async ngOnInit() {
     this.roles = this.userService.getAuthorities();
@@ -43,6 +50,14 @@ export class DashboardComponent implements OnInit {
       .pipe(
         switchMap(() => this.userService.getAllUsers()),
         tap((users) => this.users = users),
+        tap(() => this.message.success('Operación realizada correctamente')),
+      )
+      .subscribe();
+  }
+
+  changePassword() {
+    this.userService.changePassword(this.form.value.password)
+      .pipe(
         tap(() => this.message.success('Operación realizada correctamente')),
       )
       .subscribe();

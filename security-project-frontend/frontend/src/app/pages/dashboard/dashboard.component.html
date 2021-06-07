@@ -16,5 +16,45 @@
 <ng-template #admin>
   <section class="text-center">
     <h3>Último inicio de sesión {{lastLoginDate | date:'short'}}</h3>
+    <nb-card status="primary" class="w-25 mt-5 m-auto">
+      <nb-card-header>
+        <h5>Cambiar contraseña</h5>
+      </nb-card-header>
+      <nb-card-body>
+        <form aria-labelledby="title" [formGroup]="form">
+          <div class="form-group">
+              <span class="label-with-link">
+                <label class="label" for="input-password" hidden>Contraseña:</label>
+              </span>
+            <input nbInput
+                   fullWidth
+                   formControlName="password"
+                   name="password"
+                   type="password"
+                   id="input-password"
+                   placeholder="Nueva contraseña"
+                   fieldSize="large"
+            >
+            <ng-container *ngIf="form.get('password').invalid && form.get('password').touched">
+              <p class="mt-1 caption status-danger" *ngIf="form.get('password').hasError('required')">
+                La contraseña es requerida
+              </p>
+              <p class="mt-1 caption status-danger" *ngIf="form.get('password').hasError('minlength')">
+                La contraseña debe tener minimo 4 caracteres
+              </p>
+            </ng-container>
+          </div>
+          <button nbButton
+                  [disabled]="form.invalid"
+                  fullWidth
+                  status="primary"
+                  size="large"
+                  (click)="changePassword()"
+          >
+            Cambiar contraseña
+          </button>
+        </form>
+      </nb-card-body>
+    </nb-card>
   </section>
 </ng-template>
