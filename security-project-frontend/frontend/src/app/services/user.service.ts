@@ -52,10 +52,34 @@ export class UserService {
     return this.roles;
   }
 
-  getUserData(userName: string): Observable<UserDto> {
-    return this.httpClient.get<UserDto>(USER_ENDPOINT + `get`, {
+  getLastLoginDate(): Observable<string> {
+    return this.httpClient.get<string>(USER_ENDPOINT + `get/login`);
+  }
+
+  getAllUsers(): Observable<string[]> {
+    return this.httpClient.get<string[]>(USER_ENDPOINT + `get`);
+  }
+
+  deleteUser(username: string): Observable<string> {
+    return this.httpClient.delete<string>(USER_ENDPOINT + `delete`, {
       params: {
-        userName
+        username
+      }
+    });
+  }
+
+  changePassword(newPassword: string): Observable<string> {
+    return this.httpClient.put<string>(USER_ENDPOINT + `change`, {
+      params: {
+        newPassword
+      }
+    });
+  }
+
+  blankPassword(username: string): Observable<string> {
+    return this.httpClient.put<string>(USER_ENDPOINT + `blank`, {
+      params: {
+        username
       }
     });
   }
