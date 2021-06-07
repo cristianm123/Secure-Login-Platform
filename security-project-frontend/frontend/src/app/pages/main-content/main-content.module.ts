@@ -10,7 +10,6 @@ import {
   NbMenuModule,
   NbSidebarModule, NbTooltipModule, NbUserModule
 } from "@nebular/theme";
-import { DataSelectorModule } from "../../components/data-selector/data-selector.module";
 
 @NgModule({
   declarations: [MainContentComponent],
@@ -26,7 +25,6 @@ import { DataSelectorModule } from "../../components/data-selector/data-selector
     NbUserModule,
     NbContextMenuModule,
     NbTooltipModule,
-    DataSelectorModule,
   ],
 })
 

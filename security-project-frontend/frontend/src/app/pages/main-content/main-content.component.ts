@@ -5,7 +5,6 @@ import { APP_NAME } from "../../utils/app.titles";
 import { ThemeService } from "../../services/theme.service";
 import { UserService } from "../../services/user.service";
 import { Router } from "@angular/router";
-import { DataSelectorService } from "../../services/data-selector.service";
 
 @Component({
   selector: 'app-main-content',
@@ -27,7 +26,6 @@ export class MainContentComponent implements OnInit {
     private tokenService: UserService,
     private router: Router,
     private toastService: NbToastrService,
-    private dataSelectorService: DataSelectorService,
   ) {
     this.icon = localStorage.getItem('theme') ? localStorage.getItem('icon') : 'moon-outline';
     this.username = tokenService.getUserName();
@@ -40,18 +38,6 @@ export class MainContentComponent implements OnInit {
 
   showMessageDialog() {
     const roles = this.tokenService.getAuthorities();
-    const isGranted = roles.includes('superadmin') || roles.includes('client-admin')
-    if((!this.dataSelectorService.getClient() || !this.dataSelectorService.getContract()) && isGranted) {
-      this.toastService.show(this.getMessage(roles), APP_NAME, { status: 'info' });
-    }
-  }
-
-  getMessage(roles: string[]): string {
-    if(roles.includes('superadmin')) {
-      return 'Elegir cliente y contrato para desplegar datos'
-    } else {
-      return 'Elegir contrato para desplegar datos'
-    }
   }
 
   toggle(): void {

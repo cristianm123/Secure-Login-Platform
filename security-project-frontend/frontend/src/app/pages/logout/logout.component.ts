@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { APP_NAME } from "../../utils/app.titles";
 import { ThemeService } from "../../services/theme.service";
-import { DataSelectorService } from "../../services/data-selector.service";
 import { AuthService } from "../../services/auth.service";
 
 @Component({
@@ -18,7 +17,6 @@ export class LogoutComponent implements OnInit {
   constructor(
     private router: Router,
     private themeService: ThemeService,
-    private dataSelectorService: DataSelectorService,
     private authService: AuthService,
   ) {
   }
@@ -26,7 +24,6 @@ export class LogoutComponent implements OnInit {
   ngOnInit(): void {
     this.icon = localStorage.getItem('theme') ? localStorage.getItem('icon') : 'moon-outline';
     this.authService.logOut();
-    this.dataSelectorService.contractSelected.next(null);
   }
 
   switchMode() {

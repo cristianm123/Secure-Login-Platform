@@ -10,7 +10,6 @@ import { catchError, first, tap } from "rxjs/operators";
 import { of } from "rxjs";
 import { JwtDTO } from "../../models/jwt-dto";
 import { NbToastrService } from "@nebular/theme";
-import { DataSelectorService } from "../../services/data-selector.service";
 
 @Component({
   selector: 'app-login',
@@ -32,7 +31,6 @@ export class LoginComponent implements OnInit {
     private tokenService: UserService,
     private authService: AuthService,
     private toastService: NbToastrService,
-    private dataSelectorService: DataSelectorService,
   ) {
   }
 
@@ -56,7 +54,7 @@ export class LoginComponent implements OnInit {
           this.tokenService.setAuthorities(response.authority);
           response.clientId ? this.tokenService.setClientId(response.clientId) : of(null);
           response.contractId ? this.tokenService.setContractId(response.contractId) : of(null);
-          return this.router.navigate(['']).finally(() => this.dataSelectorService.generateDefaultValues());
+          return this.router.navigate(['']);
         }),
         catchError((err) => {
           this.onLoginError = true;
