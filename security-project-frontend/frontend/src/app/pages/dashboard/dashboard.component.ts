@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   theme: string;
   loading: boolean;
   roles: string[];
-  lastLoginDate: string;
+  lastLoginDate: Date;
   username: string;
   users: string[];
 
@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
   blankPassword(user: string) {
     this.userService.blankPassword(user)
       .pipe(
-        tap((message) => this.message.success(message)),
+        tap(() => this.message.success('Operación realizada correctamente')),
       )
       .subscribe();
   }
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   removeUser(user: string) {
     this.userService.deleteUser(user)
       .pipe(
-        tap((message) => this.message.success(message)),
+        tap(() => this.message.success('Operación realizada correctamente')),
       )
       .subscribe();
   }

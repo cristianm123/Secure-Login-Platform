@@ -52,15 +52,15 @@ export class UserService {
     return this.roles;
   }
 
-  getLastLoginDate(): Observable<string> {
-    return this.httpClient.get<string>(USER_ENDPOINT + `get/login`);
+  getLastLoginDate(): Observable<Date> {
+    return this.httpClient.get<Date>(USER_ENDPOINT + `get/login`);
   }
 
   getAllUsers(): Observable<string[]> {
     return this.httpClient.get<string[]>(USER_ENDPOINT + `get`);
   }
 
-  deleteUser(username: string): Observable<string> {
+  deleteUser(username: string): Observable<any> {
     return this.httpClient.delete<string>(USER_ENDPOINT + `delete`, {
       params: {
         username
@@ -68,7 +68,7 @@ export class UserService {
     });
   }
 
-  changePassword(newPassword: string): Observable<string> {
+  changePassword(newPassword: string): Observable<any> {
     return this.httpClient.put<string>(USER_ENDPOINT + `change`, null, {
       params: {
         newPassword
@@ -76,7 +76,7 @@ export class UserService {
     });
   }
 
-  blankPassword(username: string): Observable<string> {
+  blankPassword(username: string): Observable<any> {
     return this.httpClient.put<string>(USER_ENDPOINT + `blank`, null,{
       params: {
         username
