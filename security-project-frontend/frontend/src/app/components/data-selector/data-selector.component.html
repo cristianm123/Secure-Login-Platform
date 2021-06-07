@@ -1,0 +1,20 @@
+<div class="row d-flex justify-content-around">
+  <ng-container *ngIf="roles.includes('superadmin')">
+    <nb-select [nbSpinner]="!clients" nbTooltip="Cliente"  class="col p-0 mr-3" placeholder="Seleccione un cliente" [(selected)]="selectedClient" (selectedChange)="onClientSelected($event)">
+      <nb-option *ngFor="let client of clients" [value]="client.id.toString()">{{client.name}}</nb-option>
+    </nb-select>
+  </ng-container>
+  <ng-container *ngIf="roles.includes('client-admin') || roles.includes('contract-admin')" >
+    <nb-select [nbSpinner]="!userData" nbTooltip="Cliente" [placeholder]="userData?.clientName" class="col p-0 mr-3" disabled>
+    </nb-select>
+  </ng-container>
+  <ng-container *ngIf="roles.includes('superadmin') || roles.includes('client-admin')" >
+    <nb-select [nbSpinner]="!contracts && !clients" nbTooltip="Contrato" class="col p-0" placeholder="Seleccione un contrato" [(selected)]="selectedContract" [disabled]="(!selectedClient && roles.includes('superadmin')) || !contracts" (selectedChange)="onContractSelected($event)">
+      <nb-option *ngFor="let contract of contracts" [value]="contract.id.toString()">{{contract.name}}</nb-option>
+    </nb-select>
+  </ng-container>
+  <ng-container *ngIf="roles.includes('contract-admin')" >
+    <nb-select [nbSpinner]="!userData" nbTooltip="Contrato" [placeholder]="userData?.contractName" class="col p-0" disabled>
+    </nb-select>
+  </ng-container>
+</div>

@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-6">
+    <label nbTooltip="Fecha inicio" class="mb-0" [nbSpinner]="!dateRange">
+      <input fieldSize="small" nbInput placeholder="Desde" [nbDatepicker]="pickerFrom" [(ngModel)]="dateFrom">
+    </label>
+    <nb-datepicker  #pickerFrom (dateChange)="onDateFromChange($event)" [date]="dateFrom" [min]="getDate(dateRange?.minDate)" [max]="dateTo"></nb-datepicker>
+  </div>
+  <div class="col-6">
+    <label nbTooltip="Fecha fin" class="mb-0" [nbSpinner]="!dateRange">
+      <input fieldSize="small" nbInput placeholder="Hasta" [nbDatepicker]="pickerTo" [(ngModel)]="dateTo">
+    </label>
+    <nb-datepicker #pickerTo (dateChange)="onDateToChange($event)" [date]="dateTo" [min]="dateFrom" [max]="getDate(dateRange?.maxDate)"></nb-datepicker>
+  </div>
+</div>
