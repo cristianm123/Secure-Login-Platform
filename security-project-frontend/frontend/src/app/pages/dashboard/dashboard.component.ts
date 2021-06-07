@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../services/user.service";
 import { NbToastrService } from "@nebular/theme";
-import { tap } from "rxjs/operators";
+import {switchMap, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-dashboard',
@@ -41,6 +41,8 @@ export class DashboardComponent implements OnInit {
   removeUser(user: string) {
     this.userService.deleteUser(user)
       .pipe(
+        switchMap(() => this.userService.getAllUsers()),
+        tap((users) => this.users = users),
         tap(() => this.message.success('Operación realizada correctamente')),
       )
       .subscribe();
