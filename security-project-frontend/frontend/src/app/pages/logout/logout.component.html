@@ -1,21 +1,19 @@
 <nb-layout>
-  <nb-layout-column class="h-100 d-flex">
+  <nb-layout-column class="h-100 d-flex component">
       <nb-card status="primary" class="m-auto col p-0">
-      <nb-card-header class="text-center">
-        <section class="text-center">
-          <h1>Cierre de sesión exitoso</h1>
-        </section>
-      </nb-card-header>
       <nb-card-body class="p-4">
         <section>
-            <button nbButton
-                    fullWidth
-                    status="primary"
-                    size="large"
-                    (click)="goToLogin()"
-                    >
-              Volver a inicio de sesión
-            </button>
+          <section class="text-center">
+            <h1>Cierre de sesión exitoso</h1>
+          </section>
+          <button nbButton
+                  fullWidth
+                  status="primary"
+                  size="large"
+                  (click)="goToLogin()"
+                  >
+            Volver a inicio de sesión
+          </button>
         </section>
       </nb-card-body>
     </nb-card>
