@@ -24,7 +24,7 @@ import { interceptorRequestProvider } from "./interceptors/request-interceptor.s
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot(),
+    NbThemeModule.forRoot({ name: 'cosmic' }),
     NbMenuModule.forRoot(),
     NbSidebarModule.forRoot(),
     NbDatepickerModule.forRoot(),

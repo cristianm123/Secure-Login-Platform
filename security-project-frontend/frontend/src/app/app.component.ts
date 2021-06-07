@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ThemeService } from "./services/theme.service";
-import {combineLatest, Subject} from "rxjs";
-import {filter, switchMap, takeUntil} from "rxjs/operators";
+import { Subject } from "rxjs";
+
 
 @Component({
   selector: 'app-root',
@@ -13,19 +12,10 @@ export class AppComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private themeService: ThemeService,
   ) {
   }
 
   ngOnInit(): void {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      this.themeService.changeTheme(savedTheme);
-    }
-    this.themeService.updateTheme$()
-      .pipe(
-        takeUntil(this.destroy$)
-      ).subscribe();
   }
 
   ngOnDestroy(): void {

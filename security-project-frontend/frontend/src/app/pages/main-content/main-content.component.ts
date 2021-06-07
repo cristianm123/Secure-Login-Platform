@@ -1,10 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { MENU_ITEMS, PROFILE_ITEMS } from "../../utils/items.menu";
-import {NbSidebarService, NbToastrService} from "@nebular/theme";
+import { NbSidebarService } from "@nebular/theme";
 import { APP_NAME } from "../../utils/app.titles";
-import { ThemeService } from "../../services/theme.service";
 import { UserService } from "../../services/user.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-main-content',
@@ -22,10 +20,7 @@ export class MainContentComponent implements OnInit {
 
   constructor(
     private sidebarService: NbSidebarService,
-    private themeService: ThemeService,
     private tokenService: UserService,
-    private router: Router,
-    private toastService: NbToastrService,
   ) {
     this.icon = localStorage.getItem('theme') ? localStorage.getItem('icon') : 'moon-outline';
     this.username = tokenService.getUserName();
@@ -42,10 +37,5 @@ export class MainContentComponent implements OnInit {
 
   toggle(): void {
     this.sidebarService.toggle(true);
-  }
-
-  switchMode() {
-    this.themeService.switchTheme();
-    this.icon = localStorage.getItem('icon');
   }
 }

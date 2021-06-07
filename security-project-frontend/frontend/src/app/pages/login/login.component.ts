@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { APP_NAME } from "../../utils/app.titles";
-import { ThemeService } from "../../services/theme.service";
 import { UserLogin } from "../../models/user-login";
 import { UserService } from "../../services/user.service";
 import { AuthService } from "../../services/auth.service";
@@ -27,7 +26,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private themeService: ThemeService,
     private tokenService: UserService,
     private authService: AuthService,
     private toastService: NbToastrService,
@@ -66,8 +64,4 @@ export class LoginComponent implements OnInit {
       .subscribe();
   }
 
-  switchMode() {
-    this.themeService.switchTheme();
-    this.icon = localStorage.getItem('icon');
-  }
 }

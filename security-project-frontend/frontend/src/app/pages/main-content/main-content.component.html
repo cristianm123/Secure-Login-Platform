@@ -7,8 +7,6 @@
       <h1 class="ml-4">{{title}}</h1>
     </div>
     <div class="col-4 d-flex justify-content-end">
-      <button class="mr-3" nbTooltip="Cambiar tema" (click)="switchMode()" shape="round" nbButton ghost status="primary"><nb-icon [icon]="icon"></nb-icon></button>
-      <button class="mr-3" *ngIf="roles?.includes('superadmin')" nbTooltip="Crear cliente" routerLink="create-user" shape="round" nbButton ghost status="primary"><nb-icon icon="person-add-outline"></nb-icon></button>
       <nb-user [nbContextMenu]="items" shape="round" [name]="username"></nb-user>
     </div>
   </nb-layout-header>

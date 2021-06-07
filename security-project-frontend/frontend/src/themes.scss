@@ -1,5 +1,5 @@
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/cosmic';
 @import '~@nebular/theme/styles/themes/dark';
 @import 'bootstrap.css';
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
@@ -7,9 +7,4 @@
 $nb-themes: nb-register-theme((
   font-family-primary: unquote('Open Sans, sans-serif'),
   font-family-secondary: font-family-primary,
-), default, default);
-
-$nb-themes: nb-register-theme((
-  font-family-primary: unquote('Open Sans, sans-serif'),
-  font-family-secondary: font-family-primary,
-), dark, dark);
+), cosmic, cosmic);
