@@ -28,6 +28,14 @@ public class UserController {
 	@Autowired
 	UserrService service;
 
+	/**
+	 * Este método expone el servicio REST para poner en blanco la contraseña. Solo
+	 * puede ser ejecutado por usuarios regulares.
+	 *
+	 * @param username el nombre de usuario al que se le va a poner en blanco la
+	 *                 contraseña
+	 * @return
+	 */
 	@PutMapping("/blank")
 	@PreAuthorize("hasAuthority('admin')")
 	public ResponseEntity<?> blankPassword(@RequestParam(name = "username") String username) {
@@ -35,6 +43,13 @@ public class UserController {
 		return ResponseEntity.ok(null);
 	}
 
+	/**
+	 * Este método expone el servicio REST para cambiar la contraseña. Solo puede
+	 * ser ejecutado por usuarios regulares.
+	 *
+	 * @param username el nombre de usuario al que se le va a cambiar la contraseña
+	 * @return
+	 */
 	@PutMapping("/change")
 	@PreAuthorize("hasAuthority('regular')")
 	public ResponseEntity<String> changePassword(@RequestParam(name = "newPassword") String password) {
@@ -43,6 +58,13 @@ public class UserController {
 		return ResponseEntity.ok(null);
 	}
 
+	/**
+	 * Este método expone el servicio REST para eliminar un usuario. Solo puede ser
+	 * ejecutado por usuarios admin.
+	 *
+	 * @param username el nombre de usuario al que se va a eliminar.
+	 * @return
+	 */
 	@DeleteMapping("/delete")
 	@PreAuthorize("hasAuthority('admin')")
 	@Transactional
@@ -51,17 +73,28 @@ public class UserController {
 		return ResponseEntity.ok(null);
 	}
 
+	/**
+	 * Este método expone el servicio REST para consultar todos los nombres de
+	 * usuarios en el sistema. Solo puede ser ejecutado por usuarios admin.
+	 *
+	 * @return
+	 */
 	@GetMapping("/get")
 	@PreAuthorize("hasAuthority('admin')")
 	public ResponseEntity<List<String>> findAllUsers() {
 		return new ResponseEntity<List<String>>(service.findAll(), HttpStatus.OK);
 	}
 
+	/**
+	 * Este método expone el servicio REST para consultar la fecha y hora del último
+	 * login que realizó el usuario. Solo puede ser ejecutado por usuarios admin.
+	 *
+	 * @return
+	 */
 	@GetMapping("/get/login")
 	@PreAuthorize("hasAuthority('regular')")
 	public ResponseEntity<LocalDateTime> getLastLogin() {
 		UserrAuthDTO user = (UserrAuthDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return new ResponseEntity<LocalDateTime>(service.getLastLogin(user.getUsername()), HttpStatus.OK);
-		// return service.getLastLogin(user.getUsername());
 	}
 }

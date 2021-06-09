@@ -18,6 +18,12 @@ import co.edu.icesi.dev.secproject.backend.controller.security.JwtAuthentication
 import co.edu.icesi.dev.secproject.backend.logic.UserAuthService;
 import co.edu.icesi.dev.secproject.backend.utils.PBKDF2Encoder;
 
+/**
+ * Clase encargada de la seguridad de la aplicación.
+ *
+ * @author CristianM
+ *
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -47,6 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// Se puede acceder a cualquier recurso de auth sin estar autenticado
+		// Para todos los demás recursos, sí debe de estar autenticado.
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers("/auth/**").permitAll().anyRequest()
 				.authenticated().and().exceptionHandling().authenticationEntryPoint(jwtEntryPoint).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -58,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new JwtAuthenticationFilter();
 	}
 
+	// Se usa el algoritmo PBKDF2 para realizar el hashing de las contraseñas.
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new PBKDF2Encoder();

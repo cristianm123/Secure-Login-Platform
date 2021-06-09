@@ -29,6 +29,7 @@ public class UserrService {
 
 	public void blankPassword(String username) {
 		Userr u = userRepo.findById(username).get();
+		// Pone la contraseña como un espacio en blanco
 		u.setPassw(" ");
 		userRepo.save(u);
 
@@ -36,6 +37,7 @@ public class UserrService {
 
 	public void changePassword(String username, String password) {
 		Userr u = userRepo.findById(username).get();
+		// Se codifica la contraseña nueva para guardarla en la base de datos.
 		String securePassword = passEnc.encode(password);
 		u.setPassw(securePassword);
 		userRepo.save(u);
@@ -54,7 +56,7 @@ public class UserrService {
 	}
 
 	public Userr getUser(String username) {
-		// TODO Auto-generated method stub
+
 		return userRepo.findById(username).get();
 	}
 
@@ -66,6 +68,8 @@ public class UserrService {
 	public void saveLogin(String username) {
 		Login log = new Login();
 		log.setUserr(userRepo.findById(username).get());
+		// Se crea una nueva fecha con la fecha y hora actual y se guarda en la base de
+		// datos.
 		log.setTimee(new Date());
 		loginRepo.save(log);
 	}
