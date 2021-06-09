@@ -10,7 +10,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class StrongPasswordGenerator implements PasswordEncoder {
+public class PBKDF2Encoder implements PasswordEncoder {
 
 	private static byte[] fromHex(String hex) {
 		byte[] bytes = new byte[hex.length() / 2];

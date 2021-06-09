@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import co.edu.icesi.dev.secproject.backend.controller.security.JwtAuthenticationEntryPoint;
 import co.edu.icesi.dev.secproject.backend.controller.security.JwtAuthenticationFilter;
 import co.edu.icesi.dev.secproject.backend.logic.UserAuthService;
-import co.edu.icesi.dev.secproject.backend.utils.StrongPasswordGenerator;
+import co.edu.icesi.dev.secproject.backend.utils.PBKDF2Encoder;
 
 @Configuration
 @EnableWebSecurity
@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new StrongPasswordGenerator();
+		return new PBKDF2Encoder();
 	}
 
 }
